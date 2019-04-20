@@ -14,18 +14,32 @@ class CreateSalesTable extends Migration
     public function up()
     {
         Schema::create('sales', function (Blueprint $table) {
+
             $table->bigIncrements('id');
+
             $table->string('customer_first_name')
+                ->nullable()
                 ->index();
+
             $table->string('customer_last_name')
+                ->nullable()
                 ->index();
-            $table->string('phone');
+
+            $table->string('phone')
+                ->nullable()
+                ->index();
+
             $table->unsignedBigInteger('transaction_id')
-                ->unsigned();
+                ->unsigned()
+                ->index();
+
             $table->timestamps();
 
-            // Reference for foreign keys
-            // Always remember to put '->unsigned()' to the column being referenced!
+            /**
+             *
+             * Always remember to put '->unsigned()' to the column being referenced!
+             *
+             */
             $table->foreign('transaction_id')
                 ->references('id')
                 ->on('transactions');
