@@ -18,7 +18,15 @@ class CreateSalesTable extends Migration
             $table->string('customer_first_name');
             $table->string('customer_last_name');
             $table->string('phone');
+            $table->unsignedBigInteger('transaction_id')
+                ->unsigned();
             $table->timestamps();
+
+            // Reference for foreign keys
+            // Always remember to put '->unsigned()' to the column being referenced!
+            $table->foreign('transaction_id')
+                ->references('id')
+                ->on('transactions');
         });
     }
 
