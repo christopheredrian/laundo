@@ -15,12 +15,11 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
-            $table->decimal('amount', 8, 2);
+            $table->decimal('amount', 8, 2)
+                ->index();
             $table->text('details')
                 ->nullable();
             $table->unsignedBigInteger('user_id')
-                ->unsigned();
-            $table->unsignedBigInteger('sale_id')
                 ->unsigned();
             $table->timestamps();
 
@@ -29,9 +28,6 @@ class CreateTransactionsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
-            $table->foreign('sale_id')
-                ->references('id')
-                ->on('sales');
         });
     }
 

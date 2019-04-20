@@ -15,8 +15,10 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('customer_first_name');
-            $table->string('customer_last_name');
+            $table->string('customer_first_name')
+                ->index();
+            $table->string('customer_last_name')
+                ->index();
             $table->string('phone');
             $table->unsignedBigInteger('transaction_id')
                 ->unsigned();

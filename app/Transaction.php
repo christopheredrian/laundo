@@ -15,6 +15,5 @@ class Transaction extends Model
         'amount',
         'details',
         'user_id',
-        'sale_id',
     ];
 }
