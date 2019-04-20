@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\User;
 
 class CreateUsersTable extends Migration
 {
@@ -17,18 +18,33 @@ class CreateUsersTable extends Migration
 
             $table->bigIncrements('id');
 
+            /**
+             * User Role
+             */
+            $table->enum('role',User::VALID_USER_ROLES);
+
+            $table->string('email')
+                ->unique()
+                ->index();
+
+
             $table->string('first_name')
                 ->index();
 
             $table->string('last_name')
                 ->index();
 
-            $table->unsignedBigInteger('role_id')
-                ->unsigned();
-
-            $table->string('email')
-                ->unique()
+            /**
+             * Tokens
+             */
+            $table->string('verified', '1')
+                ->default(User::UNVERIFIED_USER)
                 ->index();
+
+            $table->string('verification_token')
+                ->nullable()
+                ->index();
+
 
             $table->timestamp('email_verified_at')
                 ->nullable();
@@ -39,15 +55,6 @@ class CreateUsersTable extends Migration
 
             $table->timestamps();
 
-            /**
-             *
-             * Always remember to put '->unsigned()' to the column being referenced!
-             * Reference for foreign keys
-             *
-             */
-            $table->foreign('role_id')
-                ->references('id')
-                ->on('roles');
         });
     }
 

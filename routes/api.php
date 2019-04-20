@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::resource('/logs', 'Log\LogController', [
+    'only' => ['index', 'show']
+]);
+
+Route::resource('/users', 'User\UserController', [
+    'only' => ['index', 'show']
+]);
