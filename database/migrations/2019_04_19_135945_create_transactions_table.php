@@ -15,17 +15,23 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
-            $table->string('customer_name');
-            $table->string('customer_contact_number');
             $table->decimal('amount', 8, 2);
-            $table->dateTimeTz('date_of_transaction');
-            $table->unsignedBigInteger('responsible_employee_for_transaction')->unsigned();
-            $table->text('details')->nullable();
+            $table->text('details')
+                ->nullable();
+            $table->unsignedBigInteger('user_id')
+                ->unsigned();
+            $table->unsignedBigInteger('sale_id')
+                ->unsigned();
             $table->timestamps();
 
             // Reference for foreign keys
             // Always remember to put '->unsigned()' to the column being referenced!
-            $table->foreign('responsible_employee_for_transaction')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+            $table->foreign('sale_id')
+                ->references('id')
+                ->on('sales');
         });
     }
 
