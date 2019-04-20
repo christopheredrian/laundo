@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
                 'last_name' => 'Eds',
                 'role_id' => 3,
                 'email' => 'te@laundo.com',
-                'password' => bcrypt('admin'),
+                'password' => bcrypt('manager'),
                 'created_at' => \Carbon\Carbon::now()
             ],
             [
@@ -45,7 +45,15 @@ class UsersTableSeeder extends Seeder
                 'email' => 'tm@laundo.com',
                 'password' => bcrypt('employee'),
                 'created_at' => \Carbon\Carbon::now()
-            ]
+            ],
+            [
+            'first_name' => 'Mr.',
+            'last_name' => 'Customer',
+            'role_id' => 4,
+            'email' => 'customer@laundo.com',
+            'password' => bcrypt('customer'),
+            'created_at' => \Carbon\Carbon::now()
+            ],
         );
 
         // Insert to DB array of users

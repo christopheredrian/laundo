@@ -29,6 +29,10 @@ class RolesTableSeeder extends Seeder
                 'type' => 'employee',
                 'created_at' => \Carbon\Carbon::now()
             ],
+            [
+                'type' => 'customer',
+                'created_at' => \Carbon\Carbon::now()
+            ],
         );
 
         Role::insert($roles);
