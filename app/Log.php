@@ -26,7 +26,36 @@ class Log extends Model
     const TYPE_PUBLIC = "public";
     const TYPE_SYSTEM = "system";
     const TYPE_GENERIC = "generic";
+    // When inserting a new type create a constant and also add to VALID_TYPES below
 
+    const VALID_TYPES = [
+        self::TYPE_ADMIN,
+        self::TYPE_BUSINESS_OWNER,
+        self::TYPE_EMPLOYEE,
+        self::TYPE_CUSTOMER,
+        self::TYPE_PUBLIC,
+        self::TYPE_SYSTEM,
+        self::TYPE_GENERIC
+    ];
+
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public static function isValidLogType(string $type): bool
+    {
+
+        $typeValid = false;
+
+
+        if (in_array($type, self::VALID_TYPES)) {
+            $typeValid = true;
+        }
+
+        return $typeValid;
+
+    }
 
     /**
      * Insert a log
@@ -46,15 +75,7 @@ class Log extends Model
     public static function insertLog(string $message, string $ipAddress, string $type, array $logParams = [], User $user = null): bool
     {
 
-        if (!in_array($type, [
-            self::TYPE_ADMIN,
-            self::TYPE_BUSINESS_OWNER,
-            self::TYPE_EMPLOYEE,
-            self::TYPE_CUSTOMER,
-            self::TYPE_PUBLIC,
-            self::TYPE_SYSTEM,
-            self::TYPE_GENERIC
-        ])) {
+        if (!self::isValidLogType($type)) {
             throw new \InvalidArgumentException("Invalid Type passed: $type ");
         }
 
