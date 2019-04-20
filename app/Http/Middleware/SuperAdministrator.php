@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 
+// TODO: Sean - remove super admin we do not have that on the new roles (for now )
 class SuperAdministrator
 {
     /**

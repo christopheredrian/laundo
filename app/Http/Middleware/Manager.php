@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 
+// TODO: Sean - Rename class to BusinessOnwer
 class Manager
 {
     /**
@@ -16,6 +17,8 @@ class Manager
      */
     public function handle($request, Closure $next)
     {
+        // TODO: Sean - Fix these to use the new constants on User
+        // TODO: Sean - Just check on "business_owner"
         if (Auth::user()->hasRole("superadmin") ||
             Auth::user()->hasRole("admin") ||
             Auth::user()->hasRole("manager"))

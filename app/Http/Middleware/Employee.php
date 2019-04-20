@@ -16,6 +16,8 @@ class Employee
      */
     public function handle($request, Closure $next)
     {
+        // TODO: Sean - Fix these to use the new constants on User
+        // TODO: Sean - Just check on "employee"
         if (Auth::user()->hasRole("superadmin") ||
             Auth::user()->hasRole("admin") ||
             Auth::user()->hasRole("manager") ||

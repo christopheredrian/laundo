@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             [
                 'first_name' => 'Super',
                 'last_name' => 'Administrator',
-                'role_id' => 1,
+                'role' => User::USER_ROLE_ADMIN,
                 'email' => 'sa@laundo.com',
                 'password' => bcrypt('superadmin'),
                 'created_at' => \Carbon\Carbon::now()
@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
             [
                 'first_name' => 'System',
                 'last_name' => 'Administrator',
-                'role_id' => 2,
+                'role' => User::USER_ROLE_ADMIN,
                 'email' => 'a@laundo.com',
                 'password' => bcrypt('admin'),
                 'created_at' => \Carbon\Carbon::now()
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
             [
                 'first_name' => 'Tito',
                 'last_name' => 'Eds',
-                'role_id' => 3,
+                'role' => User::USER_ROLE_ADMIN,
                 'email' => 'te@laundo.com',
                 'password' => bcrypt('manager'),
                 'created_at' => \Carbon\Carbon::now()
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
             [
                 'first_name' => 'Tito',
                 'last_name' => 'Mark',
-                'role_id' => 4,
+                'role' => User::USER_ROLE_EMPLOYEE,
                 'email' => 'tm@laundo.com',
                 'password' => bcrypt('employee'),
                 'created_at' => \Carbon\Carbon::now()

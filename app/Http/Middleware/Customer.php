@@ -16,6 +16,8 @@ class Customer
      */
     public function handle($request, Closure $next)
     {
+        // TODO: Sean - Fix these to use the new constants on User
+        // TODO: Sean - Just check on "customer"
         if (Auth::user()->hasRole("superadmin") ||
             Auth::user()->hasRole("admin") ||
             Auth::user()->hasRole("manager") ||
