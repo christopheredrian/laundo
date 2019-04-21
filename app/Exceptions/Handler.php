@@ -2,11 +2,16 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponser;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponser;
     /**
      * A list of the exception types that are not reported.
      *
@@ -29,7 +34,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -40,12 +45,75 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+
+        /**
+         *
+         * Override exception response for API
+         *
+         */
+
+        ##################################################
+        #             Laravel Specific
+        ##################################################
+
+        if ($exception instanceof ValidationException) {
+            return $this->convertValidationExceptionToResponse($exception, $request);
+        }
+
+        if ($exception instanceof ModelNotFoundException) {
+            return $this->errorResponse($exception->getMessage(), 400);
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return $this->errorResponse($exception->getMessage(), 400);
+        }
+
+        ##################################################
+        #             Php Exceptions
+        ##################################################
+
+        if ($exception instanceof \ErrorException) {
+            return $this->errorResponse($exception->getMessage(), 500);
+        }
+
+        // Append other specific Exception types below
+
+
+        /**
+         *
+         * Default
+         *
+         */
+        return $this->errorResponse($exception->getMessage(), 500);
+
+        /**
+         *
+         * Default render exception for loading views
+         *
+         */
+        // return parent::render($request, $exception);
+    }
+
+    /**
+     * Create a response object from the given validation exception.
+     *
+     * @param  \Illuminate\Validation\ValidationException $e
+     * @param  \Illuminate\Http\Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function convertValidationExceptionToResponse(ValidationException $e, $request)
+    {
+
+        $errors = $e->validator
+            ->errors()
+            ->getMessages();
+
+        return $this->validationErrorResponse($errors, 422);
     }
 }
