@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -67,11 +68,18 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof ModelNotFoundException) {
-            return $this->errorResponse($exception->getMessage(), 400);
+            return $this->errorResponse($exception->getMessage(), 404);
         }
 
         if ($exception instanceof AuthenticationException) {
-            return $this->errorResponse($exception->getMessage(), 400);
+            /**
+             * Forbidden
+             */
+            return $this->errorResponse($exception->getMessage(), 401);
+        }
+
+        if ($exception instanceof HttpException) {
+            return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
         }
 
         ##################################################
@@ -90,14 +98,20 @@ class Handler extends ExceptionHandler
          * Default
          *
          */
-        return $this->errorResponse($exception->getMessage(), 500);
+        if (config('app.debug')) {
+            /**
+             * We only render the message when APP_DEBUG is true
+             */
+            return parent::render($request, $exception);
+        }
 
         /**
          *
-         * Default render exception for loading views
+         * Unexpected Exception
          *
          */
-        // return parent::render($request, $exception);
+        return $this->errorResponse("Unexpected Exception. Try later", 500);
+
     }
 
     /**

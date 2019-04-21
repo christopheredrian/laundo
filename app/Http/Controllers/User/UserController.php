@@ -153,7 +153,7 @@ class UserController extends ApiController
 
     /**
      * Remove a resource
-     * 
+     *
      * @param User $user
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
