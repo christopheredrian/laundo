@@ -3,9 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Log extends Model
 {
+    use SoftDeletes;
+
+
+    /**
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Valid "type" column

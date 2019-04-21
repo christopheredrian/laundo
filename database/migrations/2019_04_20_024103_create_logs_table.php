@@ -62,6 +62,7 @@ class CreateLogsTable extends Migration
 
 
             $table->timestamps();
+            $table->softDeletes(); // deleted_at
 
             /**
              *

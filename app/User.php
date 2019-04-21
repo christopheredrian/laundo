@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,38 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-
-    ##################################################
-    #           User Roles
-    ##################################################
-
-    const USER_ROLE_ADMIN = "admin";
-    const USER_ROLE_EMPLOYEE = "employee";
-    const USER_ROLE_BUSINESS_OWNER = "business_owner";
-    const USER_ROLE_CUSTOMER = "customer";
-
-
-    const VALID_USER_ROLES = [
-        self::USER_ROLE_ADMIN,
-        self::USER_ROLE_EMPLOYEE,
-        self::USER_ROLE_BUSINESS_OWNER,
-        self::USER_ROLE_CUSTOMER
-    ];
-
-    ##################################################
-    #           End - User Roles
-    ##################################################
-
-    /**
-     *
-     */
-    const VERIFIED_USER = "1";
-    const UNVERIFIED_USER = "0";
-    /**
-     *
-     */
-
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -77,6 +47,42 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    ##################################################
+    #           User Roles
+    ##################################################
+
+    const USER_ROLE_ADMIN = "admin";
+    const USER_ROLE_EMPLOYEE = "employee";
+    const USER_ROLE_BUSINESS_OWNER = "business_owner";
+    const USER_ROLE_CUSTOMER = "customer";
+
+
+    const VALID_USER_ROLES = [
+        self::USER_ROLE_ADMIN,
+        self::USER_ROLE_EMPLOYEE,
+        self::USER_ROLE_BUSINESS_OWNER,
+        self::USER_ROLE_CUSTOMER
+    ];
+
+    ##################################################
+    #           End - User Roles
+    ##################################################
+
+    /**
+     *
+     */
+    const VERIFIED_USER = "1";
+    const UNVERIFIED_USER = "0";
+    /**
+     *
+     */
+
 
     /**
      *
