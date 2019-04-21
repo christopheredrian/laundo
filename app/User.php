@@ -104,7 +104,7 @@ class User extends Authenticatable
     {
         $userRole = $this->getRole();
 
-        return ($userRole == $role ) ? true : false; // If assigned role is the same as role expected, return true
+        return ($userRole == $role) ? true : false; // If assigned role is the same as role expected, return true
     }
 
     /**

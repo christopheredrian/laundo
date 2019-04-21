@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 
@@ -16,17 +17,12 @@ class Employee
      */
     public function handle($request, Closure $next)
     {
-        // TODO: Sean - Fix these to use the new constants on User
-        // TODO: Sean - Just check on "employee"
-        if (Auth::user()->hasRole("superadmin") ||
-            Auth::user()->hasRole("admin") ||
-            Auth::user()->hasRole("manager") ||
-            Auth::user()->hasRole("employee"))
+        if (Auth::user()->hasRole(User::USER_ROLE_EMPLOYEE))
         {
             return $next($request);
         } else
         {
-            abort(404);
+            abort(403, "You are forbidden from this route.");
         }
     }
 }

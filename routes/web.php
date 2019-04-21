@@ -30,42 +30,34 @@ Route::group(['middleware' => ['auth']], function () {
         return dd("all");
     });
 
-    // Routes for Super Admin only
-    Route::group(['middleware' => ['superadmin']], function () {
-        Route::get('/superAdmin', function () {
-            return dd("superadmin");
-        });
-    });
-
-
-    // Routes for Admins only (and Super Admin)
+    // Routes for Admin only
     Route::group(['middleware' => ['admin']], function () {
-        Route::get('/superAdminAndAdmins', function () {
-            return dd("superAdminAndAdmins");
+        Route::get('/admin', function () {
+            return dd("admin");
         });
     });
 
 
-    // Routes for Managers only (also for Super Admin and Admins)
-    Route::group(['middleware' => ['manager']], function () {
-        Route::get('/superAdminAdminsAndManagers', function () {
-            return dd("superAdminAdminsAndManagers");
+    // Routes for Business Owner only
+    Route::group(['middleware' => ['business_owner']], function () {
+        Route::get('/businessOwner', function () {
+            return dd("business_owner");
         });
     });
 
 
-    // Routes for Employees only (also for  Super Admin, Admins and Managers)
+    // Routes for Employees only
     Route::group(['middleware' => ['employee']], function () {
-        Route::get('/superAdminAdminsManagersAndEmployees', function () {
-            return dd("superAdminAdminsManagersAndEmployees");
+        Route::get('/employee', function () {
+            return dd("employee");
         });
     });
 
 
-    // Routes for Customers only (also for  Super Admin, Admins and Managers)
+    // Routes for Customers only
     Route::group(['middleware' => ['customer']], function () {
-        Route::get('/superAdminAdminsManagersAndCustomers', function () {
-            return dd("superAdminAdminsManagersAndCustomers");
+        Route::get('/customer', function () {
+            return dd("customer");
         });
     });
 

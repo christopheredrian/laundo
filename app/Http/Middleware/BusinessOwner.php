@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 
-// TODO: Sean - remove super admin we do not have that on the new roles (for now )
-class SuperAdministrator
+class BusinessOwner
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,12 @@ class SuperAdministrator
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->hasRole("superadmin")){
+        if (Auth::user()->hasRole(User::USER_ROLE_BUSINESS_OWNER))
+        {
             return $next($request);
-        } else{
-            abort(404);
+        } else
+        {
+            abort(403);
         }
     }
 }
