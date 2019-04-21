@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\ApiController;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
-class UserController extends Controller
+class UserController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +17,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-
-        // @TODO: Chris - paginate / limit
-        return response()->json([
-            'data' => $users
-        ], 200);
+        /**
+         *
+         */
+        return $this->showCollectionResponse(User::all(), 200);
+        /**
+         *
+         */
     }
 
     /**
@@ -44,13 +45,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
-        $statusCode = 500;
-        $response = [
-            'data' => [],
-            'status' => 'error',
-            'message' => 'There was an error in processing your request'
-        ];
 
         try {
 
@@ -75,23 +69,14 @@ class UserController extends Controller
                 throw new \ErrorException("There was an error in creating new user");
             }
 
-            $response['status'] = 'success';
-            $response['message'] = 'Successfully created a user';
-            $response['data'] = $user;
-            $statusCode = 201; // created
+            return $this->showModelResponse($user, 201, 'Successfully Created User');
 
         } catch (ValidationException $exception) {
-            $statusCode = 200; // created
-            $response['status'] = 'error';
-            $response['errors'] = $exception->errors();
+            return $this->validationErrorResponse($exception->errors(), 200);
         } catch (\Exception $exception) {
-            // return default response
-            $response['status'] = 'error';
-            $response['message'] = $exception->getMessage();
+            return $this->errorResponse($exception->getMessage(), 20);
         }
 
-        return response()
-            ->json($response, $statusCode);
 
     }
 
@@ -103,10 +88,17 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        return response()->json([
-            'data' => $user
-        ], 200);
+        try {
+            $user = User::findOrFail($id); // throws an exception when the user is not found
+
+            return $this->showModelResponse($user, 200);
+        } catch (\Exception $exception) {
+            /**
+             * User not found
+             */
+            return $this->errorResponse("Cannot find a user with the id $id", 200);
+        }
+
     }
 
     /**
@@ -129,12 +121,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $statusCode = 500;
-        $response = [
-            'data' => [],
-            'status' => 'error',
-            'message' => 'There was an error in processing your request'
-        ];
 
         try {
             $user = User::findOrFail($id);
@@ -185,23 +171,26 @@ class UserController extends Controller
                 throw new \ErrorException("There was an error in creating new user");
             }
 
-            $response['status'] = 'success';
-            $response['message'] = 'Successfully updated a user';
-            $response['data'] = $user;
-            $statusCode = 201; // updated
+            /**
+             *
+             */
+            return $this->showModelResponse($user, 201, "Successfully updated a user");
 
         } catch (ValidationException $exception) {
-            $statusCode = 200; // created
-            $response['status'] = 'error';
-            $response['errors'] = $exception->errors();
+            /**
+             *
+             */
+            return $this->validationErrorResponse($exception->errors(), 200);
+            /**
+             *
+             */
         } catch (\Exception $exception) {
-            // return default response
-            $response['status'] = 'error';
-            $response['message'] = $exception->getMessage();
+            /**
+             * Unhandled exception
+             */
+            return $this->validationErrorResponse($exception->getMessage(), 500);
         }
 
-        return response()
-            ->json($response, $statusCode);
     }
 
     /**
@@ -213,13 +202,6 @@ class UserController extends Controller
     public function destroy($id)
     {
 
-        $statusCode = 500;
-        $response = [
-            'data' => [],
-            'status' => 'error',
-            'message' => 'There was an error in processing your request'
-        ];
-
         try {
             $user = User::findOrFail($id);
 
@@ -228,15 +210,12 @@ class UserController extends Controller
             $response['status'] = 'success';
             $response['message'] = 'Successfully deleted user';
             $response['data'] = $user;
-            $statusCode = 201; // updated
+
+            return $this->showModelResponse($user, 201, 'Successfully Deleted User');
 
         } catch (\Exception $exception) {
-            // return default response
-            $response['status'] = 'error';
-            $response['message'] = "User does not exist";
+            return $this->errorResponse($exception->getMessage(), 500);
         }
 
-        return response()
-            ->json($response, $statusCode);
     }
 }

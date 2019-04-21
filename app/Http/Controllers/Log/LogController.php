@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Log;
 
+use App\Http\Controllers\ApiController;
 use App\Log;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class LogController extends Controller
+class LogController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +15,8 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = Log::all();
-
         // @TODO: Chris - paginate / limit
-        return response()->json([
-            'data' => $logs
-        ], 200);
+        return $this->showCollectionResponse(Log::all(), 200);
     }
 
     /**
