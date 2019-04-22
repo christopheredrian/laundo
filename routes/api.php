@@ -12,14 +12,21 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-//
+
+/**
+ * Use this on generic routes which only require the auth:api middleware
+ * A good practice would be to use $this->middleware on the Controller
+ * constructor itself
+ */
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
 
 
-Route::resource('/logs', 'Log\LogController', [
-    'only' => ['index', 'show']
-]);
-
+Route::resource('/logs', 'Log\LogController');
 Route::resource('/users', 'User\UserController');
+
+/**
+ * Override the default outh/token to also use this api middleware
+ */
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');

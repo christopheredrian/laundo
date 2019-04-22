@@ -10,6 +10,18 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends ApiController
 {
+    public function __construct()
+    {
+        /**
+         * Use the client.credentials middleware only for index and show
+         */
+        $this->middleware('client.credentials')->only(['index', 'show']);
+        /**
+         * The rest use the auth.api middleware
+         */
+        $this->middleware('auth:api')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *

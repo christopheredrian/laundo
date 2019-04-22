@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class LogController extends ApiController
 {
+
+    public function __construct()
+    {
+        /**
+         * Protect all routes using the auth:api middleware
+         */
+        parent::__construct();
+    }
+
     /**
      * Display a listing of the resource.
      *

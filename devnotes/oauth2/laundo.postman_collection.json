@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "b675b6a7-10e5-4711-a02e-074f586da4ef",
+		"name": "laundo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImI5YjM5ZmUzY2JmNTI5MTc2ZmZmYzZhNTAwMWFiODJjZjg4MWM0NjExOTA5YzU2YzE4ZTAxYzFkNzI3ZDc1ZDZjN2M0NzdmZjM3NzQ0YWE0In0.eyJhdWQiOiIzIiwianRpIjoiYjliMzlmZTNjYmY1MjkxNzZmZmZjNmE1MDAxYWI4MmNmODgxYzQ2MTE5MDljNTZjMThlMDFjMWQ3MjdkNzVkNmM3YzQ3N2ZmMzc3NDRhYTQiLCJpYXQiOjE1NTU4ODk4NDIsIm5iZiI6MTU1NTg4OTg0MiwiZXhwIjoxNTU1ODkxNjQyLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.uAHkvoAReE5mJSWx33UkFIwuFb_t30f6eZQZsjBiorZkRmNM-w6mMT1KyVKXheV-_mjYEM8-ywG1NZOe-pknnY_CijRffmORSXM8akgv45HFxnXUoS8LS0a3WqoABp1gkXtBB2fPyG1U_MRwmOejs257q8MiCopGRtQxwymZYYsK1iCMLmyQWK20J78D30aql8rC6ZdymtN7qBfrk4Z_ZwmL_P0-nCMIpuJR9vsaTcKk2xGqPpyW9eqda6v0xEQzf7dthE1MFGcC_OSFDUh4t1u_AG8N1XuYTveI_IxbP-ASCehmjPeanZQdjzG_B7jplzxWtmWU66gFPFR1GgGNTYCCyeyUlwm_ugBpWMpBdVPWm8Wkxcemb7QN3NJGCTTlIGRNFEcFsCniS1_2V9QEF8_Hu4VTPYJLCPnemNPuHHo_ye40R2Wtwp0x2EMIFAOiwXGYFxpq09S8EOMeja-PXKNL3d6dCzT0rBiYG1sh7hcP0SfTSelTcuYvY15u9Xs7Q4AzII1pn4unYqo3MLsRnWb5xvEVAZ9bbTbgAww61twhi5_PGqQxtB9OCC9PWg1u1aMJRAdr7oUolfWQRIxxmXEWDUsI8ot0IDEQttuRwSqrAD2cyUcMpDW330mEMQHSJj6m_zX2QX7SvHVeXgNW9nAsB0Y0lEsFLNmc7EEbZx0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://laundo.test/api/users/",
+							"protocol": "http",
+							"host": [
+								"laundo",
+								"test"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://laundo.test/api/users?first_name=Chris&last_name=Espiritu&email=christest@gmail.com&role=admin&password=password&password_confirmation=password",
+							"protocol": "http",
+							"host": [
+								"laundo",
+								"test"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "Chris"
+								},
+								{
+									"key": "last_name",
+									"value": "Espiritu"
+								},
+								{
+									"key": "email",
+									"value": "christest@gmail.com"
+								},
+								{
+									"key": "role",
+									"value": "admin"
+								},
+								{
+									"key": "password",
+									"value": "password"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://laundo.test/api/users/11?first_name=Christopher",
+							"protocol": "http",
+							"host": [
+								"laundo",
+								"test"
+							],
+							"path": [
+								"api",
+								"users",
+								"11"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "Christopher"
+								},
+								{
+									"key": "last_name",
+									"value": "Espiritu",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "christest@gmail.acom",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"disabled": true
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImI5YjM5ZmUzY2JmNTI5MTc2ZmZmYzZhNTAwMWFiODJjZjg4MWM0NjExOTA5YzU2YzE4ZTAxYzFkNzI3ZDc1ZDZjN2M0NzdmZjM3NzQ0YWE0In0.eyJhdWQiOiIzIiwianRpIjoiYjliMzlmZTNjYmY1MjkxNzZmZmZjNmE1MDAxYWI4MmNmODgxYzQ2MTE5MDljNTZjMThlMDFjMWQ3MjdkNzVkNmM3YzQ3N2ZmMzc3NDRhYTQiLCJpYXQiOjE1NTU4ODk4NDIsIm5iZiI6MTU1NTg4OTg0MiwiZXhwIjoxNTU1ODkxNjQyLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.uAHkvoAReE5mJSWx33UkFIwuFb_t30f6eZQZsjBiorZkRmNM-w6mMT1KyVKXheV-_mjYEM8-ywG1NZOe-pknnY_CijRffmORSXM8akgv45HFxnXUoS8LS0a3WqoABp1gkXtBB2fPyG1U_MRwmOejs257q8MiCopGRtQxwymZYYsK1iCMLmyQWK20J78D30aql8rC6ZdymtN7qBfrk4Z_ZwmL_P0-nCMIpuJR9vsaTcKk2xGqPpyW9eqda6v0xEQzf7dthE1MFGcC_OSFDUh4t1u_AG8N1XuYTveI_IxbP-ASCehmjPeanZQdjzG_B7jplzxWtmWU66gFPFR1GgGNTYCCyeyUlwm_ugBpWMpBdVPWm8Wkxcemb7QN3NJGCTTlIGRNFEcFsCniS1_2V9QEF8_Hu4VTPYJLCPnemNPuHHo_ye40R2Wtwp0x2EMIFAOiwXGYFxpq09S8EOMeja-PXKNL3d6dCzT0rBiYG1sh7hcP0SfTSelTcuYvY15u9Xs7Q4AzII1pn4unYqo3MLsRnWb5xvEVAZ9bbTbgAww61twhi5_PGqQxtB9OCC9PWg1u1aMJRAdr7oUolfWQRIxxmXEWDUsI8ot0IDEQttuRwSqrAD2cyUcMpDW330mEMQHSJj6m_zX2QX7SvHVeXgNW9nAsB0Y0lEsFLNmc7EEbZx0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://laundo.test/api/users/1",
+							"protocol": "http",
+							"host": [
+								"laundo",
+								"test"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://laundo.test/api/users/7",
+							"protocol": "http",
+							"host": [
+								"laundo",
+								"test"
+							],
+							"path": [
+								"api",
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "oauth",
+			"item": [
+				{
+					"name": "http://laundo.test/oauth/token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "HIBUXyvjQFoGB3OrbHM7dKqT5mqtLyLheZyxglM1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://laundo.test/oauth/token",
+							"protocol": "http",
+							"host": [
+								"laundo",
+								"test"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "password: /oauth/token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "kJyewsP6Kbn7P7ur53PNVnUTl98ssfXzDGIArD75",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "sa@laundo.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "superadmin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://laundo.test/oauth/token",
+							"protocol": "http",
+							"host": [
+								"laundo",
+								"test"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "logs",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI5MGQyNTU5NTdkOWU5YzE1MDg0N2Q0OGUwNTI5ZThkMjkzMWE2ZDBlZDJmNjg2MzYzM2VjNmY4Nzg2N2RkOTFmMThlNjM2ZjhmZDhlOTQ5In0.eyJhdWQiOiI0IiwianRpIjoiMjkwZDI1NTk1N2Q5ZTljMTUwODQ3ZDQ4ZTA1MjllOGQyOTMxYTZkMGVkMmY2ODYzNjMzZWM2Zjg3ODY3ZGQ5MWYxOGU2MzZmOGZkOGU5NDkiLCJpYXQiOjE1NTU4OTA3ODYsIm5iZiI6MTU1NTg5MDc4NiwiZXhwIjoxNTU1ODkyNTg2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.FjdIDpUOLPfdgG7l4BCy4qtwiRjGnggr99rF-QjVKkGXS5lG0Md8RR0-glJN_jxcVraYGP0eNee1-2mqgpbE4-ngg7bEm1auIwkzP7CnrNWGfyDgsMesFpqVb_XqSa3jsVNyG_puLfaaWlQSdnSvFez6uZ0Yi0XPwhqOQg7Iuvxy7qaFsn3YhkWMwtQG3BLjI5hkB_4O90mxC34ykZ5U-_g7PZc5HNXpmetUYYPdV5CnixIuGpmvXMt_I6pT1IsAvieLCjHZ1sn9CDfKhf66B-3XhN7gNcg2GUOsmhmT_hei2uHMpX45aRQf7_XjdYDfbQTeW3xT-xxSP5zQwEyG9Epx_jph852Otk0Mmf4rElSJ1m4gzrLhEBIiDj3vsAMTzCZruSeivAzlXlGndKS19-BUBWlfeK3e2_HRhMdU0S0EFaO0xji8ur6MOxB52pJs1uj8mPlKX-APaqPKGIQW3g_dODjYqyTDAFOeQbYo_NdFocgPLwlZgODRXJKnuqnNGRveHI8vDWgr4goIz0d83kHZukAQnL5Bs5SehzMyCfA3w5czWefFZit9IZhgc_wJ9Nkb7yDD-EL9yM0KiFt2jRotgRdE4mDBJEOA2JzBLk1nIq_XAgpcfoUvXzxgZo9AtGao7Wp6cPAwv054SaxazltGCHNuo6krSznoHuxHWPM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://laundo.test/api/logs",
+							"protocol": "http",
+							"host": [
+								"laundo",
+								"test"
+							],
+							"path": [
+								"api",
+								"logs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
