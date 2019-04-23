@@ -19,5 +19,6 @@ class Sale extends Model
         'customer_last_name',
         'phone',
         'transaction_id',
+        'deleted',
     ];
 }

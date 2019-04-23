@@ -33,6 +33,11 @@ class CreateSalesTable extends Migration
                 ->unsigned()
                 ->index();
 
+            $table->boolean('deleted')
+                ->unsigned()
+                ->default(0)
+                ->index();
+
             $table->timestamps();
 
             /**
