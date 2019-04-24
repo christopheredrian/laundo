@@ -1,10 +1,17 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-
+import React from 'react';
 
 const Row = (props) => {
+
+    let classNames = "row";
+
+
+    if (props.className) {
+        classNames = `${classNames} ${props.className}`;
+    }
+
+
     return (
-        <div className={'row'} style={...props.style}>
+        <div className={classNames} style={props.style}>
             {props.children}
         </div>
     );

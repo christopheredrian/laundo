@@ -1,30 +1,35 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+
 import Button from "./essentials/Button";
 import Text from "./essentials/Text";
+import Container from "./essentials/Container";
+import Row from "./essentials/Row";
+import Card from "./essentials/Card";
 
+/**
+ *
+ */
 export default class App extends Component {
     render() {
         return (
-            <div className="container">
-                <div className="row justify-content-center">
+            <Container>
+                <Row className="justify-content-center">
                     <div className="col-md-8">
-                        <div className="card">
+                        <Card className="card">
                             <div className="card-header">Example Component</div>
 
                             <div className="card-body">
                                 I'm an example component!
                             </div>
                             <Button>
-                                Sample Button
+                                <Text>Sample Button</Text>
                             </Button>
-                            <Text>
-                                Sample Text
-                            </Text>
-                        </div>
+
+                        </Card>
                     </div>
-                </div>
-            </div>
+                </Row>
+            </Container>
         );
     }
 }

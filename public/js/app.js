@@ -62488,6 +62488,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _essentials_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./essentials/Button */ "./resources/js/components/essentials/Button/index.js");
 /* harmony import */ var _essentials_Text__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./essentials/Text */ "./resources/js/components/essentials/Text/index.js");
+/* harmony import */ var _essentials_Container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./essentials/Container */ "./resources/js/components/essentials/Container/index.js");
+/* harmony import */ var _essentials_Row__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./essentials/Row */ "./resources/js/components/essentials/Row/index.js");
+/* harmony import */ var _essentials_Card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./essentials/Card */ "./resources/js/components/essentials/Card/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62511,6 +62514,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+/**
+ *
+ */
+
 var App =
 /*#__PURE__*/
 function (_Component) {
@@ -62525,19 +62534,17 @@ function (_Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_essentials_Container__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_essentials_Row__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        className: "justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-8"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_essentials_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
       }, "Example Component"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
-      }, "I'm an example component!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_essentials_Button__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Sample Button"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_essentials_Text__WEBPACK_IMPORTED_MODULE_3__["default"], null, "Sample Text")))));
+      }, "I'm an example component!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_essentials_Button__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_essentials_Text__WEBPACK_IMPORTED_MODULE_3__["default"], null, "Sample Button"))))));
     }
   }]);
 
@@ -62580,6 +62587,84 @@ Button.propTypes = {
   onClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 };
 /* harmony default export */ __webpack_exports__["default"] = (Button);
+
+/***/ }),
+
+/***/ "./resources/js/components/essentials/Card/index.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/essentials/Card/index.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Card = function Card(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: 'card',
+    style: props.style
+  }, props.children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Card);
+
+/***/ }),
+
+/***/ "./resources/js/components/essentials/Container/index.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/essentials/Container/index.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Container = function Container(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: 'container',
+    style: props.style
+  }, props.children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Container);
+
+/***/ }),
+
+/***/ "./resources/js/components/essentials/Row/index.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/essentials/Row/index.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Row = function Row(props) {
+  var classNames = "row";
+
+  if (props.className) {
+    classNames = "".concat(classNames, " ").concat(props.className);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classNames,
+    style: props.style
+  }, props.children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Row);
 
 /***/ }),
 
