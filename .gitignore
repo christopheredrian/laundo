@@ -3,3 +3,5 @@
 
 # PhpStorm files
 .idea
+
+node_modules

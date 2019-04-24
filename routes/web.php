@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
@@ -62,3 +62,9 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 });
+
+/**
+ * npm install
+ * npm run watch
+ */
+Route::view('/{path?}', 'app');
