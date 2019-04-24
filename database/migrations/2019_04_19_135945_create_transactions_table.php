@@ -17,7 +17,8 @@ class CreateTransactionsTable extends Migration
 
             $table->bigIncrements('id')->unique();
 
-            $table->decimal('amount', 8, 2)
+            $table->decimal('total_amount', 8, 2)
+                ->unsigned()
                 ->index();
 
             /**

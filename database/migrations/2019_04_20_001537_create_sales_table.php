@@ -29,14 +29,15 @@ class CreateSalesTable extends Migration
                 ->nullable()
                 ->index();
 
+            $table->decimal('amount', 8, 2)
+                ->unsigned()
+                ->index();
+
             $table->unsignedBigInteger('transaction_id')
                 ->unsigned()
                 ->index();
 
-            $table->boolean('deleted')
-                ->unsigned()
-                ->default(0)
-                ->index();
+            $table->softDeletes();
 
             $table->timestamps();
 

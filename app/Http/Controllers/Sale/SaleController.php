@@ -38,69 +38,52 @@ class SaleController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        try {
+        $rules = [
+            'customer_first_name' => 'required|string|size:30',
+            'customer_last_name' => 'required|string|size:40',
+            'amount' => 'required|between:1,99999999.99',
+            'phone' => 'required|string|size:13', // Validation is from Philippine numbers ex. +639058743577
+            'transaction_id' => 'required|integer|lte:1',
+        ];
 
-            $rules = [
-                'customer_first_name' => 'required|string',
-                'customer_last_name' => 'required|string',
-                'phone' => 'required|string',
-                'transaction_id' => 'required|integer|lte:1',
-            ];
+        $this->validate($request, $rules);
 
-            $this->validate($request, $rules);
+        $data = $request->all();
 
-            $data = $request->all();
+        $sale = Sale::create($data);
 
-            $sale = Sale::create($data);
-
-            if (!$sale->id || empty($sale->id)) {
-                throw new \ErrorException("There was an error in creating a new sale");
-            }
-
-            return $this->showModelResponse($sale, 201, 'Successfully created Sale');
-
-        } catch (ValidationException $exception) {
-            return $this->validationErrorResponse($exception->errors(), 200);
-        } catch (\Exception $exception) {
-            return $this->errorResponse($exception->getMessage(), 20);
+        if (!$sale->id || empty($sale->id)) {
+            throw new \ErrorException("There was an error in creating a new sale");
         }
+
+        return $this->showModelResponse($sale, 201, 'Successfully created Sale');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        try
-        {
-            $sale = DB::table('sales')
-                ->join('transactions', 'sales.transaction_id', '=', 'sales.id')
-                ->where('sales.id', '=', $id)
-                ->get();
+        $sale = DB::table('sales')
+            ->join('transactions', 'sales.transaction_id', '=', 'sales.id')
+            ->where('sales.id', '=', $id)
+            ->get();
 
-            return $this->showCollectionResponse($sale, 200);
-
-        } catch (\Exception $e)
-        {
-            /**
-             * User not found
-             */
-            return $this->errorResponse("Cannot find a sale with the id $id", 200);
-        }
+        return $this->showCollectionResponse($sale, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -111,70 +94,50 @@ class SaleController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        try {
-            $sale = Sale::findOrFail($id);
+        $sale = Sale::findOrFail($id);
 
-            $rules = [
-                'customer_first_name' => 'required|string',
-                'customer_last_name' => 'required|string',
-                'phone' => 'required|string',
-                'transaction_id' => 'required|integer|lte:1',
-            ];
+        $rules = [
+            'customer_first_name' => 'string|size:30',
+            'customer_last_name' => 'string|size:40',
+            'amount' => 'between:1,99999999.99',
+            'phone' => 'string|size:13', // Validation is from Philippine numbers ex. +639058743577
+            'transaction_id' => 'required|integer|lte:1',
+        ];
 
-            $this->validate($request, $rules);
+        $this->validate($request, $rules);
 
-            if ($request->has('customer_first_name')) {
-                $sale->customer_first_name = $request->customer_first_name;
-            }
-
-            if ($request->has('customer_last_name')) {
-                $sale->customer_last_name = $request->customer_last_name;
-            }
-
-            if ($request->has('phone')) {
-                $sale->phone = $request->phone;
-            }
-
-            if ($request->has('transaction_id')) {
-                // TODO : Sean Ask Eds if we will edit/change transaction id for good or create new one.
-                $sale->transaction_id = $request->transaction_id;
-            }
-
-            $sale->save();
-
-            /**
-             *
-             */
-            return $this->showModelResponse($sale, 201, "Successfully updated a sale");
-            /**
-             *
-             */
-        } catch (ValidationException $exception) {
-            /**
-             *
-             */
-            return $this->validationErrorResponse($exception->errors(), 200);
-            /**
-             *
-             */
-        } catch (\Exception $exception) {
-            /**
-             * Unhandled exception
-             */
-            return $this->validationErrorResponse($exception->getMessage(), 500);
+        if ($request->has('customer_first_name')) {
+            $sale->customer_first_name = $request->customer_first_name;
         }
+
+        if ($request->has('customer_last_name')) {
+            $sale->customer_last_name = $request->customer_last_name;
+        }
+
+        if ($request->has('phone')) {
+            $sale->phone = $request->phone;
+        }
+
+        if ($request->has('transaction_id')) {
+            // TODO : Sean Ask Eds if we will edit/change transaction id for good or create new one.
+            $sale->transaction_id = $request->transaction_id;
+        }
+
+        $sale->save();
+
+        return $this->showModelResponse($sale, 201, "Successfully updated a sale");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -182,19 +145,14 @@ class SaleController extends ApiController
         /**
          * Only perform soft delete. NEVER delete!
          */
-        try {
-            $sale = Sale::findOrFail($id);
+        $sale = Sale::findOrFail($id);
 
-            $sale->deleted = 1;
+        $sale->delete;
 
-            $response['status'] = 'success';
-            $response['message'] = 'Successfully deleted sale';
-            $response['data'] = $sale;
+        $response['status'] = 'success';
+        $response['message'] = 'Successfully deleted sale';
+        $response['data'] = $sale;
 
-            return $this->showModelResponse($sale, 201, 'Successfully deleted Sale');
-
-        } catch (\Exception $exception) {
-            return $this->errorResponse($exception->getMessage(), 500);
-        }
+        return $this->showModelResponse($sale, 201, 'Successfully deleted Sale');
     }
 }
