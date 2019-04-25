@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Sale;
 
 use App\Http\Controllers\ApiController;
+use App\Transaction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
@@ -18,8 +20,7 @@ class SaleController extends ApiController
      */
     public function index()
     {
-        $sales = DB::table('sales')
-            ->join('transactions', 'sales.transaction_id', '=', 'sales.id')
+        $sales = Sale::join('transactions', 'sales.transaction_id', '=', 'sales.id')
             ->get();
 
         return $this->showCollectionResponse($sales, 200);
@@ -48,14 +49,27 @@ class SaleController extends ApiController
             'customer_last_name' => 'required|string|size:40',
             'amount' => 'required|between:1,99999999.99',
             'phone' => 'required|string|size:13', // Validation is from Philippine numbers ex. +639058743577
-            'transaction_id' => 'required|integer|lte:1',
         ];
 
         $this->validate($request, $rules);
 
         $data = $request->all();
 
-        $sale = Sale::create($data);
+        $sale = DB::transaction(function () use ($data) {
+            $user_id = Auth::user()->id;
+            $transaction = new Transaction();
+
+            $transaction->total_amount = $data->amount;
+            $transaction->details = "";
+            $transaction->user_id = $user_id ;
+            $transaction->save();
+
+            $data['transaction_id'] = $transaction->id;
+            $sale = Sale::create($data);
+
+            return $sale;
+        });
+
 
         if (!$sale->id || empty($sale->id)) {
             throw new \ErrorException("There was an error in creating a new sale");
@@ -72,8 +86,7 @@ class SaleController extends ApiController
      */
     public function show($id)
     {
-        $sale = DB::table('sales')
-            ->join('transactions', 'sales.transaction_id', '=', 'sales.id')
+        $sale = Sale::join('transactions', 'sales.transaction_id', '=', 'sales.id')
             ->where('sales.id', '=', $id)
             ->get();
 
