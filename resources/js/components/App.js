@@ -11,7 +11,27 @@ import Card from "./essentials/Card";
  *
  */
 export default class App extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    /**
+     *
+     */
+    componentDidMount() {
+
+    }
+
     render() {
+        /**
+         * Switch case on:
+         *      get logged in user
+         *          Role type
+         *      Login page
+         *
+         *
+         */
         return (
             <Container>
                 <Row className="justify-content-center">
