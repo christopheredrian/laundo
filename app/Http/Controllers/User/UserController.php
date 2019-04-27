@@ -15,11 +15,11 @@ class UserController extends ApiController
         /**
          * Use the client.credentials middleware only for index and show
          */
-        $this->middleware('client.credentials')->only(['index', 'show']);
+//        $this->middleware('client.credentials')->only(['index', 'show']);
         /**
          * The rest use the auth.api middleware
          */
-        $this->middleware('auth:api')->except(['index', 'show']);
+//        $this->middleware('auth:api')->except(['index', 'show']);
     }
 
     /**
