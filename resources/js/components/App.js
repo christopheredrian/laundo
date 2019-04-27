@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Button from "./essentials/Button";
-import Text from "./essentials/Text";
-import Container from "./essentials/Container";
-import Row from "./essentials/Row";
-import Card from "./essentials/Card";
+
+import {Col, Row} from 'react-bootstrap';
+import Sidebar from "./essentials/Sidebar";
+import Header from "./essentials/Header";
+
+import UsersList from "./users/UsersList";
+import SalesList from "./sales/SalesList";
+import Settings from "./settings/Settings";
 
 /**
  *
@@ -16,43 +20,37 @@ export default class App extends Component {
         super(props);
     }
 
-    /**
-     *
-     */
+
     componentDidMount() {
 
     }
 
     render() {
-        /**
-         * Switch case on:
-         *      get logged in user
-         *          Role type
-         *      Login page
-         *
-         *
-         */
+
         return (
-            <Container>
-                <Row className="justify-content-center">
-                    <div className="col-md-8">
-                        <Card className="card">
-                            <div className="card-header">Example Component</div>
+            <Router>
+                <div style={{margin: 0}}>
+                    <Header/>
+                    <Row>
+                        <Col md={3}>
+                            <Sidebar/>
+                        </Col>
+                        <Col md={9}>
+                            {/* Routes below we can create another component later instead */}
+                            <Route exact path={`/sales`} component={SalesList}/>
+                            <Route exact path={`/users`} component={UsersList}/>
+                            <Route exact path={`/settings`} component={Settings}/>
+                        </Col>
 
-                            <div className="card-body">
-                                I'm an example component!
-                            </div>
-                            <Button>
-                                <Text>Sample Button</Text>
-                            </Button>
+                    </Row>
+                </div>
 
-                        </Card>
-                    </div>
-                </Row>
-            </Container>
+
+            </Router>
         );
     }
 }
+
 
 if (document.getElementById('app')) {
     ReactDOM.render(<App/>, document.getElementById('app'));

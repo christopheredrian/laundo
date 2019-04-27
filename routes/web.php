@@ -15,7 +15,38 @@
 //    return view('welcome');
 //});
 
+
 Auth::routes();
+
+##################################################################
+#                                                                #
+#                        SUBDOMAIN                               #
+#                                                                #
+##################################################################
+
+Route::domain('{account}.laundo.test')->group(function () {
+    /**
+     *
+     * Subdomain stated
+     *
+     */
+    Route::get('/{path?}', function ($account) {
+
+        return view('app');
+    });
+});
+
+
+##################################################################
+#                                                                #
+#              No Subdomain stated Load views                    #
+#                                                                #
+##################################################################
+/**
+ *
+ *
+ *
+ */
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -63,8 +94,5 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-/**
- * npm install
- * npm run watch
- */
 Route::view('/{path?}', 'app');
+
