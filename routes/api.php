@@ -25,6 +25,7 @@ use Illuminate\Http\Request;
 
 Route::resource('/logs', 'Log\LogController');
 Route::resource('/users', 'User\UserController');
+Route::resource('/oauth', 'OauthController');
 
 /**
  * Override the default outh/token to also use this api middleware

@@ -1,20 +1,18 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
+
+import BusinessOwnerContainer from './containers/BusinessOwnerContainer'
+import AdminContainer from "./containers/AdminContainer";
 
 
-import {Col, Row} from 'react-bootstrap';
-import Sidebar from "./essentials/Sidebar";
-import Header from "./essentials/Header";
-
-import UsersList from "./users/UsersList";
-import SalesList from "./sales/SalesList";
-import Settings from "./settings/Settings";
+const USER_ROLE_BUSINESS_OWNER = 'business_owner';
+const USER_ROLE_ADMIN = 'admin';
 
 /**
  *
  */
-export default class App extends Component {
+class App extends Component {
 
     constructor(props) {
         super(props);
@@ -27,30 +25,31 @@ export default class App extends Component {
 
     render() {
 
+        /**
+         * Temporary user role for testing
+         */
+        const
+            // role = USER_ROLE_BUSINESS_OWNER,
+            role = USER_ROLE_ADMIN;
+
+
+        const panels = {
+            // <<role>> : <<panel component>>
+            [USER_ROLE_ADMIN]: <AdminContainer/>,
+            [USER_ROLE_BUSINESS_OWNER]: <BusinessOwnerContainer/>
+        };
+
+
         return (
             <Router>
-                <div style={{margin: 0}}>
-                    <Header/>
-                    <Row>
-                        <Col md={3}>
-                            <Sidebar/>
-                        </Col>
-                        <Col md={9}>
-                            {/* Routes below we can create another component later instead */}
-                            <Route exact path={`/sales`} component={SalesList}/>
-                            <Route exact path={`/users`} component={UsersList}/>
-                            <Route exact path={`/settings`} component={Settings}/>
-                        </Col>
-
-                    </Row>
-                </div>
-
-
+                {panels[role] || null}
             </Router>
         );
+
     }
 }
 
+export default App;
 
 if (document.getElementById('app')) {
     ReactDOM.render(<App/>, document.getElementById('app'));
