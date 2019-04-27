@@ -13,14 +13,14 @@ class OauthClientList extends React.PureComponent {
             clients: []
         };
 
-        this.fetchUsers = this.fetchUsers.bind(this);
+        this.fetchOauthClients = this.fetchOauthClients.bind(this);
     }
 
     componentDidMount() {
-        this.fetchUsers();
+        this.fetchOauthClients();
     }
 
-    fetchUsers() {
+    fetchOauthClients() {
         axios.get('/api/oauth')
             .then((response) => {
 

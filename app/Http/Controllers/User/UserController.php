@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\ApiController;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
@@ -181,6 +182,17 @@ class UserController extends ApiController
 
         return $this->showModelResponse($user, 201, 'Successfully Deleted User');
 
+
+    }
+
+    public function getLoggedInUser(){
+        $loggedInUserDetails = Auth::user();
+
+        if(!empty($loggedInUserDetails)) {
+            return $this->showModelResponse($loggedInUserDetails);
+        } else {
+            return $this->errorResponse("Forbidden", 403);
+        }
 
     }
 }

@@ -14,3 +14,8 @@ require('./bootstrap');
  */
 
 require('./components/App');
+
+if (document.getElementById('app')) {
+
+
+}
